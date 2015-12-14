@@ -3,6 +3,7 @@
 Using multiple `Spinner`s is not possible with Espresso. It appears that the second `onData` is being run before the drop down from the `Spinner` has fully disappeared.
 
 [Relevant activity is here.](app/src/main/java/gd/not/testapplication/MainActivity.java)
+
 [Relevant test case is here.](app/src/androidTest/java/gd/not/testapplication/MainActivityTest.java)
 
 See stack trace:
