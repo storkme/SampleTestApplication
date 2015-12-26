@@ -24,14 +24,8 @@ public class MainActivityTest {
 
     @Test
     public void testMultipleSpinners() {
-        onData(hasToString("Spinner 1 bar"))
-                .inAdapterView(withId(R.id.spinner1))
-                .perform(click());
-        onData(hasToString("Spinner 2 bar"))
-                .inAdapterView(withId(R.id.spinner2))
-                .perform(click());
-        onData(hasToString("Spinner 3 bar"))
-                .inAdapterView(withId(R.id.spinner3))
-                .perform(click());
+        onData(hasToString("Spinner 1 bar")).inAdapterView(withId(R.id.spinner1)).perform(click());
+        onData(hasToString("Spinner 2 bar")).inAdapterView(withId(R.id.spinner2)).perform(click());
+        onData(hasToString("Spinner 3 bar")).inAdapterView(withId(R.id.spinner3)).perform(click());
     }
 }

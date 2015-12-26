@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -19,6 +20,22 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        mock {
+            buildConfigField "boolean", "IS_MOCKED", "true"
+
+            applicationId "gd.not.testapplication_mock"
+            minSdkVersion 21
+        }
+        dev {
+            buildConfigField "boolean", "IS_MOCKED", "false"
+            applicationId "gd.not.testapplication_dev"
+
+            //speed up development builds http://developer.android.com/tools/building/multidex.html#dev-build
+            minSdkVersion 21
+        }
+        // prod builds, etc...
+    }
 }
 
 dependencies {
@@ -26,14 +43,15 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support.test:rules:0.4.1'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
-    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.0') {
-        exclude group: 'com.android.support', module: 'appcompat'
-        exclude group: 'com.android.support', module: 'support-v4'
-        exclude module: 'recyclerview-v7'
-    }
+    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.0'
     androidTestCompile 'org.hamcrest:hamcrest-library:1.3'
 
-    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.6.0'
+    androidTestCompile 'com.squareup.okhttp:mockwebserver:2.5.0'
 
+    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
+    compile 'com.google.dagger:dagger:2.0.2'
     compile 'com.android.support:appcompat-v7:23.1.1'
+
+    provided 'com.google.dagger:dagger-compiler:2.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 }
